@@ -12,9 +12,10 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction) {
     const url = interaction.options.getString('url');
+    console.log('Shorten command triggered with URL:', url);
 
     try {
-        const response = await fetch('https://discordbot-production-45f7.up.railway.app/url', {
+        const response = await fetch('https://qrgenr.up.railway.app/url', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,10 +25,13 @@ export async function execute(interaction) {
             }),
         });
 
+        console.log('Backend response status:', response.status);
+
         const data = await response.json();
+        console.log('Backend response data:', data);
 
         if (response.ok) {
-            const shortUrl = `https://discordbot-production-45f7.up.railway.app/url/${data.id}`;
+            const shortUrl = `https://qrgenr.up.railway.app/url/${data.id}`;
             await interaction.reply(`Here's your shortened URL: ${shortUrl}`);
         } else {
             await interaction.reply('Failed to shorten URL. Please try again.');
