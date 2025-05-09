@@ -6,7 +6,9 @@ import {
 import {
     Client,
     GatewayIntentBits,
-    Collection
+    Collection,
+    REST,
+    Routes
 } from 'discord.js';
 import {
     fileURLToPath
@@ -94,6 +96,34 @@ for (const file of commandFiles) {
         client.commands.set(command.data.name, command);
     }
 }
+
+// Register slash commands
+const rest = new REST().setToken(process.env.DISCORD_TOKEN);
+
+(async () => {
+    try {
+        console.log('Started refreshing application (/) commands.');
+
+        const commands = [];
+        for (const file of commandFiles) {
+            const filePath = join(commandsPath, file);
+            const command = await import(filePath);
+            if ('data' in command) {
+                commands.push(command.data.toJSON());
+            }
+        }
+
+        await rest.put(
+            Routes.applicationCommands(client.user.id), {
+                body: commands
+            },
+        );
+
+        console.log('Successfully reloaded application (/) commands.');
+    } catch (error) {
+        console.error('Error registering commands:', error);
+    }
+})();
 
 // Discord bot events
 client.once('ready', () => {
