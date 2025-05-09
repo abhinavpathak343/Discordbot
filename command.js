@@ -14,7 +14,7 @@ export async function execute(interaction) {
     const url = interaction.options.getString('url');
 
     try {
-        const response = await fetch('http://localhost:8080/url', {
+        const response = await fetch('https://discordbot-production-45f7.up.railway.app/url', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export async function execute(interaction) {
         const data = await response.json();
 
         if (response.ok) {
-            const shortUrl = `http://localhost:8080/url/${data.id}`;
+            const shortUrl = `https://discordbot-production-45f7.up.railway.app/url/${data.id}`;
             await interaction.reply(`Here's your shortened URL: ${shortUrl}`);
         } else {
             await interaction.reply('Failed to shorten URL. Please try again.');
