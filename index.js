@@ -97,10 +97,12 @@ for (const file of commandFiles) {
     }
 }
 
-// Register slash commands
-const rest = new REST().setToken(process.env.DISCORD_TOKEN);
+// Discord bot events
+client.once('ready', async () => {
+    console.log(`Logged in as ${client.user.tag}!`);
 
-(async () => {
+    // Register slash commands
+    const rest = new REST().setToken(process.env.DISCORD_TOKEN);
     try {
         console.log('Started refreshing application (/) commands.');
 
@@ -123,11 +125,6 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
     } catch (error) {
         console.error('Error registering commands:', error);
     }
-})();
-
-// Discord bot events
-client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('interactionCreate', async interaction => {
