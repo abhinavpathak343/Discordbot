@@ -11,7 +11,8 @@ import {
     Routes
 } from 'discord.js';
 import {
-    fileURLToPath
+    fileURLToPath,
+    pathToFileURL
 } from 'url';
 import {
     dirname,
@@ -91,7 +92,7 @@ const commandFiles = readdirSync(commandsPath).filter(file => file.endsWith('.js
 
 for (const file of commandFiles) {
     const filePath = join(commandsPath, file);
-    const command = await import(filePath);
+    const command = await import(pathToFileURL(filePath));
     if ('data' in command && 'execute' in command) {
         client.commands.set(command.data.name, command);
     }
@@ -109,7 +110,7 @@ client.once('ready', async () => {
         const commands = [];
         for (const file of commandFiles) {
             const filePath = join(commandsPath, file);
-            const command = await import(filePath);
+            const command = await import(pathToFileURL(filePath));
             if ('data' in command) {
                 commands.push(command.data.toJSON());
             }
