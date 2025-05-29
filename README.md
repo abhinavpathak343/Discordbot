@@ -50,7 +50,7 @@ Invite the bot to your server and use the following **slash commands**:
 
 ## ☁️ Deployment
 
-Deployed using [**Render*] — a powerful cloud platform for effortless app hosting.
+Deployed using [**Render**] — a powerful cloud platform for effortless app hosting.
 
 ---
 
