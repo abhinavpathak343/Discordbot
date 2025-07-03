@@ -46,7 +46,7 @@ mongoose.connect(MONGO_URI, {
 });
 
 // Mount the URL router at /api/url
-app.use('/api/url', urlRouter);
+app.use('/api/shortlink', urlRouter);
 
 // Start the server
 app.listen(port, () => {
