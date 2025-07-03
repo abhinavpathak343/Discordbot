@@ -9,7 +9,7 @@ interface URLShortenerProps {
   onUrlCreated: (url: ShortenedURL) => void;
 }
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL||'http://localhost:8080/api/url'; // Use the backend API base from .env
+const API_BASE = import.meta.env.VITE_API_BASE_URL; // Use the backend API base from .env
 
 const URLShortener: React.FC<URLShortenerProps> = ({ onUrlCreated }) => {
   const [originalUrl, setOriginalUrl] = useState('');

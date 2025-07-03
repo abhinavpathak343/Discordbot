@@ -3,7 +3,7 @@ import axios from 'axios';
 import { QrCode, Download, Copy, Palette, Settings, CheckCircle, AlertCircle } from 'lucide-react';
 import { copyToClipboard, downloadQRCode } from '../utils/urlUtils';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL||'http://localhost:8080/api/url';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const QRGenerator: React.FC = () => {
   const [text, setText] = useState('');
