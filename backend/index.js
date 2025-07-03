@@ -27,7 +27,10 @@ const app = express();
 const port = 8080;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173||process.env.vercel_url'
+
+}));
 app.use(express.json());
 
 // Replace with your MongoDB connection string
