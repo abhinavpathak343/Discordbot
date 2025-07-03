@@ -30,8 +30,7 @@ const port = process.env.PORT || 8080;
 app.use(cors({
     origin: [
         'http://localhost:5173',
-        'https://qrshortner.vercel.app/',
-         // (optional: set this in your .env for your Vercel frontend URL)
+        'https://qrshortner.vercel.app'
     ]
 }));
 app.use(express.json());
