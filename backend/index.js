@@ -24,12 +24,15 @@ const __dirname = dirname(__filename);
 
 // Initialize Express app
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:5173||process.env.vercel_url'
-
+    origin: [
+        'http://localhost:5173',
+        process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+        process.env.FRONTEND_URL // (optional: set this in your .env for your Vercel frontend URL)
+    ].filter(Boolean)
 }));
 app.use(express.json());
 
